@@ -6,9 +6,17 @@
       <input type="text" placeholder="description" v-model="newBoard.description">
       <button type="submit">Create Board</button>
     </form>
-    <div v-for="board in boards" :key="board._id">
-      <router-link :to="{name: 'board', params: {boardId: board._id}}">{{board.title}}</router-link>
-      <button @click="deleteBoard(board._id)">DELETE BOARD</button>
+    <div class="row d-flex justify-content-around">
+      <div class="col-4 card" v-for="board in boards" :key="board._id">
+        <router-link class="colorpls" :to="{name: 'board', params: {boardId: board._id}}">
+          <h1>
+            {{board.title}}</h1>
+        </router-link>
+        <hr>
+        <div class="card-bottom text-center">
+          <button class="deletebtn" @click="deleteBoard(board._id)">DELETE</button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -49,3 +57,34 @@
     }
   };
 </script>
+<style>
+  .card {
+    color: black;
+    /* background-image: url('https://vignette.wikia.nocookie.net/edwikia/images/0/0d/Plank.png/revision/latest/scale-to-width-down/338?cb=20170726093347'); */
+    background-repeat: no-repeat;
+    background-size: 400px 150px;
+    background-color: rgba(0, 0, 0, 0.192);
+    border-top-color: black;
+    border-right-color: black;
+    border-right-style: solid;
+    border-top-style: solid;
+    letter-spacing: 1px;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    margin-top: 3vh;
+    /* align-items: center !important; */
+    max-width: 26%;
+    min-height: 18vh;
+  }
+
+  /* .card-bottom {} */
+
+  .deletebtn {
+    max-width: 5vw;
+  }
+
+  .colorpls {
+    color: white;
+    text-shadow: -3px -1px black;
+  }
+</style>

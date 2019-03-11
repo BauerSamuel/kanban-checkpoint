@@ -39,6 +39,7 @@
     text-align: center;
     color: #020202;
     background-color: rgb(161, 161, 159);
+    /* background-image: url('https://vignette.wikia.nocookie.net/edwikia/images/0/0d/Plank.png/revision/latest/scale-to-width-down/338?cb=20170726093347'); */
     min-height: 100vh;
     align-content: flex-start;
   }

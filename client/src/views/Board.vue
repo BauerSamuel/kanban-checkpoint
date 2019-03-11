@@ -1,8 +1,14 @@
 <template>
-  <div class="board">
+  <div class="board col-12">
     {{board.title}}
+    <form @submit.prevent="addBoard">
+      <input type="text" placeholder="title" v-model="newBoard.title" required>
+      <input type="text" placeholder="description" v-model="newBoard.description">
+      <button type="submit">Create Board</button>
+    </form>
+    <list v-for="list in lists" :listData='list'>
 
-    <list v-for="list in lists" :listData='list'></list>
+    </list>
   </div>
 </template>
 

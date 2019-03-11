@@ -2,7 +2,8 @@ var expressSession = require("express-session");
 var mongoStore = require("connect-mongodb-session")(expressSession);
 
 var store = new mongoStore({
-  uri: "mongodb://bankan:100%Anklejuice@den1.mongo1.gear.host:27001/bankan",
+  // mongodb://markkanban:He02R~9I82-M@den1.mongo1.gear.host:27001/markkanban
+  uri: "mongodb://bankan:student!@den1.mongo1.gear.host:27001/bankan",
   collection: "Sessions"
 });
 

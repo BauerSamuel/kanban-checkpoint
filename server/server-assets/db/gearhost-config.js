@@ -1,6 +1,6 @@
 var mongoose = require('mongoose')
 //mongodb://<Username>:<password>@<database server>/<server name>
-var connectionString = "mongodb://bankan:100%Anklejuice@den1.mongo1.gear.host:27001/bankan" //CHANGE ME!!!!!
+var connectionString = "mongodb://bankan:student!@den1.mongo1.gear.host:27001/bankan" //CHANGE ME!!!!!
 var connection = mongoose.connection
 
 
