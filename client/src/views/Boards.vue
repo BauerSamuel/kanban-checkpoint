@@ -1,6 +1,6 @@
 <template>
-  <div class="boards">
-    WELCOME TO THE BOARDS!!!
+  <div class="col-12 boards">
+    <h3>WELCOME BANNER HERE</h3>
     <form @submit.prevent="addBoard">
       <input type="text" placeholder="title" v-model="newBoard.title" required>
       <input type="text" placeholder="description" v-model="newBoard.description">
