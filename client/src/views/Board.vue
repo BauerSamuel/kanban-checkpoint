@@ -7,29 +7,34 @@
       <button class="" type="submit">Create List</button>
     </form>
     <list v-for="list in lists" :listData='list'>
-
     </list>
   </div>
 </template>
 
 <script>
+  import List from '@/components/List.vue'
   export default {
     name: "board",
-    computed: {
-      board() {
-        return this.$store.state.boards.find(b => b._id == this.boardId) || { title: 'Loading...' }
-      },
-      lists() {
-        return this.$store.state.lists
-      }
-    },
     data() {
       return {
         newList: {
           title: '',
           description: '',
-          board: this.boardId
+          boardId: this.boardId
         }
+      }
+    },
+    mounted() {
+      this.$store.dispatch('getBoards')
+      this.$store.dispatch('getLists', this.boardId)
+    },
+    computed: {
+      board() {
+        let test = this.$store.state.boards.find(b => b._id == this.boardId) || "loading..."
+        return test
+      },
+      lists() {
+        return this.$store.state.lists
       }
     },
     methods: {
@@ -41,6 +46,9 @@
         this.$store.dispatch("deleteList", list)
       }
     },
-    props: ["boardId"]
+    props: ["boardId"],
+    components: {
+      List
+    }
   };
 </script>

@@ -1,24 +1,20 @@
 <template>
   <div class="col-12 boards">
-    <h3>WELCOME BANNER HERE</h3>
+    <h3>Wecome to Jurassic Park</h3>
     <form @submit.prevent="addBoard">
-      <input class="createboard" type="text" placeholder="title:" v-model="newBoard.title" required>
-      <input class="createboard" type="text" placeholder="description:" v-model="newBoard.description">
+      <input class="createboard" type="text" placeholder="  title:" v-model="newBoard.title" required>
+      <input class="createboard" type="text" placeholder="  description:" v-model="newBoard.description">
       <button class="createboard" type="submit">Create Board <i class="fas fa-external-link-alt"></i></button>
     </form>
     <div class="row d-flex justify-content-around">
-      <div class="col-4 card" v-for="board in boards" :key="board._id">
-        <router-link class="colorpls" :board="board" :to="{name: 'board', params: {boardId: board._id}}">
-          <h1>
-            {{board.title}}</h1>
-        </router-link>
-        <button class="btn-danger deletebtn" @click="deleteBoard(board._id)"><i class="fas fa-trash"></i></button>
-        <hr>
-        <div class="card-bottom text-center">
-          <h3>Lists Here</H3>
-        </div>
+      <div class="col-12 card" v-for="board in boards" :key="board._id">
+        <h1>
+          <router-link class="colorpls" :board="board" :to="{name: 'board', params: {boardId: board._id}}">
+            {{board.title}} </router-link> <i class="fas fa-trash" @click="deleteBoard(board._id)"></i>
+        </h1>
       </div>
     </div>
+  </div>
   </div>
 </template>
 
@@ -74,8 +70,8 @@
     padding-bottom: 1vh;
     margin-top: 3vh;
     /* align-items: center !important; */
-    max-width: 26%;
-    min-height: 18vh;
+    /* max-width: 26%;
+    min-height: 18vh; */
   }
 
   .card-bottom {
@@ -99,7 +95,7 @@
   }
 
   .createboard {
-    border-radius: 10px;
+    border-radius: 5px;
     margin-left: 1vw;
   }
 </style>

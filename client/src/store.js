@@ -94,19 +94,25 @@ export default new Vuex.Store({
 
 
     //#region -- LISTS --
+    getLists({ commit, dispatch }, boardId) {
+      api.get(`boards/${boardId}/lists`)
+        .then(res => {
+          commit('setLists', res.data)
+        })
+    },
     addList({ commit, dispatch }, listData) {
-      let boardId = listData.board
+      let boardId = listData.boardId
       api.post(`/boards/${boardId}/lists`, listData)
         .then(serverList => {
-          dispatch('getLists')
+          dispatch('getLists', boardId)
         })
     },
     deleteList({ commit, dispatch }, listData) {
-      let boardId = listData.board
+      let boardId = listData.boardId
       let listId = listData._id
       api.delete(`boards/${boardId}/lists/${listId}`)
         .then(res => {
-          dispatch('getLists')
+          dispatch('getLists', boardId)
         })
     }
 

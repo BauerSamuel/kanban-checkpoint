@@ -1,9 +1,9 @@
 let router = require('express').Router()
-let Boards = require('../models/board')
+let Lists = require('../models/list')
 
 //GET
-router.get('/', (req, res, next) => {
-  Boards.find({ authorId: req.session.uid })
+router.get('/:boardId/lists', (req, res, next) => {
+  Lists.find({ authorId: req.session.uid, boardId: req.params.boardId })
     .then(data => {
       res.send(data)
     })
@@ -14,11 +14,12 @@ router.get('/', (req, res, next) => {
 })
 
 //POST
-router.post('/', (req, res, next) => {
+router.post('/:boardId/lists', (req, res, next) => {
   req.body.authorId = req.session.uid
-  Boards.create(req.body)
-    .then(newBoard => {
-      res.send(newBoard)
+  console.log("From list route " + req.body.authorId)
+  Lists.create(req.body)
+    .then(newList => {
+      res.send(newList)
     })
     .catch(err => {
       console.log(err)
@@ -27,13 +28,13 @@ router.post('/', (req, res, next) => {
 })
 
 //PUT
-router.put('/:id', (req, res, next) => {
-  Boards.findById(req.params.id)
-    .then(board => {
-      if (!board.authorId.equals(req.session.uid)) {
+router.put('/:boardId/lists/:listId', (req, res, next) => {
+  Lists.findById(req.params.listId)
+    .then(list => {
+      if (!list.authorId.equals(req.session.uid)) {
         return res.status(401).send("ACCESS DENIED!")
       }
-      board.update(req.body, (err) => {
+      list.update(req.body, (err) => {
         if (err) {
           console.log(err)
           next()
@@ -49,13 +50,13 @@ router.put('/:id', (req, res, next) => {
 })
 
 //DELETE
-router.delete('/:id', (req, res, next) => {
-  Boards.findById(req.params.id)
-    .then(board => {
-      if (!board.authorId.equals(req.session.uid)) {
+router.delete('/:boardId/lists/:listId', (req, res, next) => {
+  Lists.findById(req.params.listId)
+    .then(list => {
+      if (!list.authorId.equals(req.session.uid)) {
         return res.status(401).send("ACCESS DENIED!")
       }
-      board.remove(err => {
+      list.remove(err => {
         if (err) {
           console.log(err)
           next()
@@ -68,8 +69,4 @@ router.delete('/:id', (req, res, next) => {
       res.status(400).send('ACCESS DENIED; Invalid Request')
     })
 })
-
-let listRoutes = require('./list')
-router.use('/', listRoutes)
-
 module.exports = router
