@@ -2,8 +2,8 @@
   <div class="board col-12">
     <h1>{{board.title}}</h1>
     <form @submit.prevent="addList">
-      <input type="text" placeholder="title" v-model="newList.title" required>
-      <input type="text" placeholder="description" v-model="newList.description">
+      <input type="text" placeholder="  TITLE" v-model="newList.title" required>
+      <!-- <input type="text" placeholder="description" v-model="newList.description"> -->
       <button class="" type="submit">Create List</button>
     </form>
     <list v-for="list in lists" :listData='list'>
@@ -19,7 +19,6 @@
       return {
         newList: {
           title: '',
-          description: '',
           boardId: this.boardId
         }
       }

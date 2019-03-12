@@ -1,9 +1,9 @@
 let router = require('express').Router()
-let Lists = require('../models/list')
+let Tasks = require('../models/task')
 
 //GET
-router.get('/:boardId/lists', (req, res, next) => {
-  Lists.find({ authorId: req.session.uid, boardId: req.params.boardId })
+router.get('/:listId/tasks', (req, res, next) => {
+  Tasks.find({ authorId: req.session.uid, boardId: req.params.boardId })
     .then(data => {
       res.send(data)
     })
@@ -14,11 +14,11 @@ router.get('/:boardId/lists', (req, res, next) => {
 })
 
 //POST
-router.post('/:boardId/lists', (req, res, next) => {
+router.post('/:listId/lists', (req, res, next) => {
   req.body.authorId = req.session.uid
-  Lists.create(req.body)
-    .then(newList => {
-      res.send(newList)
+  Tasks.create(req.body)
+    .then(newTask => {
+      res.send(newTask)
     })
     .catch(err => {
       console.log(err)
@@ -27,13 +27,13 @@ router.post('/:boardId/lists', (req, res, next) => {
 })
 
 //PUT
-router.put('/:boardId/lists/:listId', (req, res, next) => {
-  Lists.findById(req.params.listId)
-    .then(list => {
-      if (!list.authorId.equals(req.session.uid)) {
+router.put('/:listdId/tasks/:taskId', (req, res, next) => {
+  Tasks.findById(req.params.taskId)
+    .then(task => {
+      if (!task.authorId.equals(req.session.uid)) {
         return res.status(401).send("ACCESS DENIED!")
       }
-      list.update(req.body, (err) => {
+      task.update(req.body, (err) => {
         if (err) {
           console.log(err)
           next()
@@ -49,13 +49,13 @@ router.put('/:boardId/lists/:listId', (req, res, next) => {
 })
 
 //DELETE
-router.delete('/:boardId/lists/:listId', (req, res, next) => {
-  Lists.findById(req.params.listId)
-    .then(list => {
-      if (!list.authorId.equals(req.session.uid)) {
+router.delete('/:listdId/tasks/:taskId', (req, res, next) => {
+  Tasks.findById(req.params.taskId)
+    .then(task => {
+      if (!task.authorId.equals(req.session.uid)) {
         return res.status(401).send("ACCESS DENIED!")
       }
-      list.remove(err => {
+      task.remove(err => {
         if (err) {
           console.log(err)
           next()
@@ -68,7 +68,4 @@ router.delete('/:boardId/lists/:listId', (req, res, next) => {
       res.status(400).send('ACCESS DENIED; Invalid Request')
     })
 })
-
-let taskRoutes = require('./task')
-router.use('/', taskRoutes)
 module.exports = router

@@ -1,9 +1,9 @@
 <template>
   <div class="col-12 boards">
-    <h3>Wecome to Jurassic Park</h3>
+    <h3>Welcome to Jurassic Park</h3>
     <form @submit.prevent="addBoard">
-      <input class="createboard" type="text" placeholder="  title:" v-model="newBoard.title" required>
-      <input class="createboard" type="text" placeholder="  description:" v-model="newBoard.description">
+      <input class="createboard" type="text" placeholder="  TITLE" v-model="newBoard.title" required>
+      <input class="createboard" type="text" placeholder="  DESCRIPTION:" v-model="newBoard.description">
       <button class="createboard" type="submit">Create Board <i class="fas fa-external-link-alt"></i></button>
     </form>
     <div class="row d-flex justify-content-around">
