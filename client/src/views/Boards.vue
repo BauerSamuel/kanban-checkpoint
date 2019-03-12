@@ -2,19 +2,20 @@
   <div class="col-12 boards">
     <h3>WELCOME BANNER HERE</h3>
     <form @submit.prevent="addBoard">
-      <input type="text" placeholder="title" v-model="newBoard.title" required>
-      <input type="text" placeholder="description" v-model="newBoard.description">
-      <button type="submit">Create Board</button>
+      <input class="createboard" type="text" placeholder="title:" v-model="newBoard.title" required>
+      <input class="createboard" type="text" placeholder="description:" v-model="newBoard.description">
+      <button class="createboard" type="submit">Create Board <i class="fas fa-external-link-alt"></i></button>
     </form>
     <div class="row d-flex justify-content-around">
       <div class="col-4 card" v-for="board in boards" :key="board._id">
-        <router-link class="colorpls" :to="{name: 'board', params: {boardId: board._id}}">
+        <router-link class="colorpls" :board="board" :to="{name: 'board', params: {boardId: board._id}}">
           <h1>
             {{board.title}}</h1>
         </router-link>
+        <button class="btn-danger deletebtn" @click="deleteBoard(board._id)"><i class="fas fa-trash"></i></button>
         <hr>
         <div class="card-bottom text-center">
-          <button class="deletebtn" @click="deleteBoard(board._id)">DELETE</button>
+          <h3>Lists Here</H3>
         </div>
       </div>
     </div>
@@ -77,14 +78,28 @@
     min-height: 18vh;
   }
 
-  /* .card-bottom {} */
+  .card-bottom {
+    color: white;
+    text-shadow: -3px -1px black;
+    letter-spacing: 1px;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+  }
 
   .deletebtn {
-    max-width: 5vw;
+    width: 10%;
+    margin-left: 45%;
+    margin-right: 45%;
+    border-radius: 20px;
   }
 
   .colorpls {
     color: white;
     text-shadow: -3px -1px black;
+  }
+
+  .createboard {
+    border-radius: 10px;
+    margin-left: 1vw;
   }
 </style>
