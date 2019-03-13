@@ -3,7 +3,7 @@ let Tasks = require('../models/task')
 
 //GET
 router.get('/:listId/tasks', (req, res, next) => {
-  Tasks.find({ authorId: req.session.uid, boardId: req.params.boardId })
+  Tasks.find({ authorId: req.session.uid, listId: req.params.listId })
     .then(data => {
       res.send(data)
     })
@@ -14,7 +14,7 @@ router.get('/:listId/tasks', (req, res, next) => {
 })
 
 //POST
-router.post('/:listId/lists', (req, res, next) => {
+router.post('/:listId/tasks', (req, res, next) => {
   req.body.authorId = req.session.uid
   Tasks.create(req.body)
     .then(newTask => {
@@ -65,7 +65,14 @@ router.delete('/:listdId/tasks/:taskId', (req, res, next) => {
       })
     })
     .catch(err => {
-      res.status(400).send('ACCESS DENIED; Invalid Request')
+      console.log(err)
+      res.status(400).send('ACCESS DENiED; Invalid Request')
     })
 })
+
+//
+// NEED COMMENTS STILL
+//
+
+
 module.exports = router

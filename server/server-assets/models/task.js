@@ -13,6 +13,7 @@ let comment = new Schema({
 let schema = new Schema({
   content: { type: String, required: true },
   authorId: { type: ObjectId, ref: 'User', required: true },
+  listId: { type: ObjectId, ref: 'List', required: true },
   comments: [comment]
 })
 

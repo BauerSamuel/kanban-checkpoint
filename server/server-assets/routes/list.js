@@ -70,5 +70,5 @@ router.delete('/:boardId/lists/:listId', (req, res, next) => {
 })
 
 let taskRoutes = require('./task')
-router.use('/', taskRoutes)
+router.use('/:boardId/lists', taskRoutes)
 module.exports = router
