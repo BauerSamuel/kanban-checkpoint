@@ -129,10 +129,6 @@ export default new Vuex.Store({
           commit('setTasks', { listId, tasks: res.data })
         })
     },
-    // {
-    //   listId: listId,
-    //   tasks: [allOurTasksOnDB]
-    // }
     addTask({ commit, dispatch }, dataObject) {
       let boardId = dataObject.boardId
       let listId = dataObject.listId
@@ -147,6 +143,24 @@ export default new Vuex.Store({
       let listId = dataObject.listId
       let taskId = dataObject.task._id
       api.delete(`boards/${boardId}/lists/${listId}/tasks/${taskId}`)
+        .then(res => {
+          dispatch('getTasks', dataObject)
+        })
+    },
+    addComment({ commit, dispatch }, dataObject) {
+      let boardId = dataObject.boardId
+      let listId = dataObject.listId
+      let taskId = dataObject.comment.taskId
+      api.put(`boards/${boardId}/lists/${listId}/tasks/${taskId}/comments`, dataObject.comment)
+        .then(res => {
+          dispatch('getTasks', dataObject)
+        })
+    },
+    deleteComment({ commit, dispatch }, dataObject) {
+      let boardId = dataObject.boardId
+      let listId = dataObject.listId
+      let taskId = dataObject.taskId
+      api.put(`boards/${boardId}/lists/${listId}/tasks/${taskId}/comments`, dataObject.comment)
         .then(res => {
           dispatch('getTasks', dataObject)
         })

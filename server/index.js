@@ -48,8 +48,6 @@ server.use('/api/boards', boardRoutes)
 
 
 
-
-
 //Catch all
 //default error handler
 server.use('*', (err, req, res, next) => {

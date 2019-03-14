@@ -27,24 +27,27 @@ router.post('/:listId/tasks', (req, res, next) => {
 })
 
 //PUT
-router.put('/:listdId/tasks/:taskId', (req, res, next) => {
+router.put('/:listdId/tasks/:taskId/comments', (req, res, next) => {
   Tasks.findById(req.params.taskId)
     .then(task => {
       if (!task.authorId.equals(req.session.uid)) {
         return res.status(401).send("ACCESS DENIED!")
       }
-      task.update(req.body, (err) => {
-        if (err) {
-          console.log(err)
-          next()
-          return
+      if (!req.body._id) {
+        req.body.authorId = req.session.uid
+        task.comments.push(req.body)
+      } else {
+        for (let i = 0; i < task.comments.length; i++) {
+          let c = task.comments[i]
+          if (c._id.toString() == req.body._id) task.comments.splice(i, 1)
         }
-        res.send("Successfully Updated")
-      });
+      }
+      task.save()
+      res.send("Comment successfully changed")
+      return
     })
     .catch(err => {
-      console.log(err)
-      next()
+      res.status(400).send(err)
     })
 })
 
@@ -66,13 +69,10 @@ router.delete('/:listdId/tasks/:taskId', (req, res, next) => {
     })
     .catch(err => {
       console.log(err)
-      res.status(400).send('ACCESS DENiED; Invalid Request')
+      res.status(400).send('ACCESS DENIED; Invalid Request')
     })
 })
 
-//
-// NEED COMMENTS STILL
-//
 
 
 module.exports = router

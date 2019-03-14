@@ -1,9 +1,10 @@
 <template>
   <div class="col-8 offset-2 boards">
-    <hr>
-    <h1><b><i>Welcome to BanKan</i></b></h1>
-    <h4><i>Plan Your Future:</i></h4>
-    <h6><i>--Living Life Outside of the Kan--</i></h6>
+    <div class="row">
+      <div class="col-12">
+        <img src="../../public/LoginTitle.png">
+      </div>
+    </div>
     <hr>
     <br>
     <form @submit.prevent="addBoard">
@@ -11,6 +12,8 @@
       <input class="createboard" type="text" placeholder="  DESCRIPTION:" v-model="newBoard.description">
       <button class="createboard" type="submit">Create Board <i class="fas fa-external-link-alt"></i></button>
     </form>
+    <br>
+    <hr>
     <div class="row d-flex justify-content-around">
       <div class="col-4 card " v-for="board in boards" :key="board._id">
         <h1>
@@ -70,7 +73,7 @@
     /* background-image: url('https://vignette.wikia.nocookie.net/edwikia/images/0/0d/Plank.png/revision/latest/scale-to-width-down/338?cb=20170726093347'); */
     background-repeat: no-repeat;
     background-size: 400px 150px;
-    background-color: rgba(0, 0, 0, 0.116);
+    background-color: rgba(0, 0, 0, 0.445);
     border-top-color: #cc9ff1;
     border-right-color: #cc9ff1;
     border-right-style: solid;
@@ -118,6 +121,15 @@
     height: 1px;
   }
 
+  .topr {
+    background-color: rgba(0, 0, 0, 0.288);
+    color: #95af88;
+    text-shadow: 2px 1px black;
+    letter-spacing: 1px;
+    border-radius: 10px;
+
+  }
+
   /* .boards {
     background-image: url('http://1.bp.blogspot.com/-9OzYeaBsw5E/T_Jp9FdOAxI/AAAAAAAAAV8/6i1QlXF39MM/s1600/1335671239477.jpg');
     background-repeat: no-repeat;
@@ -126,3 +138,8 @@
     min-height: 100vh;
   } */
 </style>
+
+
+<!-- <h1><b><i>Welcome to BanKan</i></b></h1>
+<h4><i>Plan Your Future:</i></h4>
+<h6><i>--Living Life Outside of the Kan--</i></h6> -->

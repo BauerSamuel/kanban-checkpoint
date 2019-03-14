@@ -9,7 +9,7 @@
       <button class="" v-if="seen" type="submit">Create List <i class="fas fa-external-link-alt"></i></button>
     </form>
     <div class="row d-flex justify-content-around">
-      <list class="" v-for=" list in lists" :listData='list'>
+      <list class="" v-for="list in lists" :listData='list'>
       </list>
     </div>
   </div>
@@ -17,6 +17,7 @@
 
 <script>
   import List from '@/components/List.vue'
+  import Task from '@/components/Task.vue'
   export default {
     name: "board",
     data() {
@@ -77,5 +78,8 @@
   .stitle {
     background-color: rgba(0, 0, 0, 0.123);
     border-radius: 30px;
+    color: white;
+    text-shadow: -1px -1px black;
+    letter-spacing: 3px;
   }
 </style>

@@ -6,7 +6,8 @@ let schemaName = 'Task'
 
 let comment = new Schema({
   content: { type: String, required: true },
-  authorId: { type: ObjectId, ref: 'User', required: true }
+  authorId: { type: ObjectId, ref: 'User', required: true },
+  taskId: { type: ObjectId, ref: 'Task', required: true }
 })
 
 

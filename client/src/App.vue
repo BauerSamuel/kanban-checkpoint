@@ -1,9 +1,11 @@
 <template>
   <div class="container-fluid">
     <div class="row" id="app">
-      <div id="nav" class="col-12">
+      <div id="nav" class="col-12 navr">
+
         <router-link tag="button" class="btn boardbtn" to="/boards"><i class="fas fa-chalkboard-teacher"></i> Boards
         </router-link>
+        <a href="https://i.gifer.com/cW2.gif"><img src="../public/Oscar.png" alt="grouch" class="smallerImg"></a>
         <button class="btn logoutbtn" @click="logout"><i class="fas fa-sign-out-alt"></i> Logout</button>
       </div>
       <router-view />
@@ -38,16 +40,23 @@
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #020202;
-    background-image: url('http://1.bp.blogspot.com/-9OzYeaBsw5E/T_Jp9FdOAxI/AAAAAAAAAV8/6i1QlXF39MM/s1600/1335671239477.jpg');
+    background-image: url('../public/OscarBGunblur.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
     min-height: 100vh;
     align-content: flex-start;
+
   }
+
+
 
   #nav {
     padding: 20px;
+  }
+
+  .navr {
+    margin-bottom: -40px;
   }
 
   #nav a {
@@ -69,5 +78,13 @@
     background-color: #cc9ff1;
     border: 2px solid rgba(0, 0, 0, 0.452);
     margin-right: 5px;
+  }
+
+  .smallerImg {
+    max-height: 100px;
+    margin-right: -30px;
+    margin-left: -6px;
+    margin-top: -10px;
+    margin-bottom: 20px
   }
 </style>

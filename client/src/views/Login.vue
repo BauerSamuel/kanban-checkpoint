@@ -15,6 +15,19 @@
       <p v-if="loginForm">No account? Click here to Register</p>
       <p v-else>Already have an account? Click here to Login</p>
     </div>
+    <div class="row">
+      <div class="titlez col-12">
+        <img src="../../public/LoginTitle.png">
+      </div>
+      <div class=" col-3">
+        <br>
+        <a href="https://youtu.be/8l5ZjSI5G4E"><img class="grouch fa-pulse" src="../../public/Oscar.png"
+            alt="grouch"></a>
+      </div>
+      <div class="sayin col-6">
+        <img src="../../public/GrouchSubtitle.png" alt="">
+      </div>
+    </div>
   </div>
 </template>
 
@@ -50,5 +63,19 @@
 <style>
   .action {
     cursor: pointer;
+  }
+
+  .sayin {
+    margin-top: 45vh;
+  }
+
+  .titlez {
+    justify-content: left;
+    display: flex;
+    padding-left: 2vw;
+  }
+
+  .grouch {
+    margin-left: 8vw;
   }
 </style>
