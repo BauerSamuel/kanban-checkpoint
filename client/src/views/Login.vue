@@ -21,8 +21,7 @@
       </div>
       <div class=" col-3">
         <br>
-        <a href="https://youtu.be/8l5ZjSI5G4E"><img class="grouch fa-pulse" src="../../public/Oscar.png"
-            alt="grouch"></a>
+        <a href="https://youtu.be/8l5ZjSI5G4E"><img class="grouch" src="../../public/Oscar.png" alt="grouch"></a>
       </div>
       <div class="sayin col-6">
         <img src="../../public/GrouchSubtitle.png" alt="">
