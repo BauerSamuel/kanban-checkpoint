@@ -3,9 +3,9 @@
     <drag :transfer-data="{ taskMoved: taskData} ">
       <div class="taskCard">
         <h6>
-          <span id=""><i @click="formBool = !formBool" class="fas fa-comment-medical commentr"></i></span>
           {{taskData.content}}
-          <span id="trashspantwo"><i @click="deleteTask(taskData)" class="fas fa-trash"></i></span>
+          <span id="trashspantwo"><i @click="deleteTask(taskData)" class="fas fa-ban"></i></span>
+          <span id=""><i @click="formBool = !formBool" class="fas fa-comment-medical commentr"></i></span>
         </h6>
         <form @submit.prevent>
           <input v-if="formBool" type="text" placeholder=" Comment:" v-model="newComment.content" required>
@@ -15,7 +15,7 @@
       </div>
       <div class="commentz" v-for="comment in taskData.comments">
         <p>{{comment.content}} <span id="trashspanthree"><i @click="deleteComment(comment)"
-              class="fas fa-trash"></i></span>
+              class="fas fa-ban"></i></span>
         </p>
       </div>
     </drag>
@@ -106,26 +106,29 @@
     border-top-style: solid; */
     text-align: left;
     padding-left: 3em;
-    border-radius: 25px;
+    border-radius: 15px;
     margin-top: 5px;
     width: 20vw;
     float: right;
-    max-height: 1.5em;
+
     margin-bottom: 1.5px;
   }
 
   #trashspantwo {
-    font-size: 13px;
+    font-size: 14px;
     color: rgba(255, 0, 0, 0.842);
     cursor: pointer;
-    text-shadow: 0px 0px white;
+    /* text-shadow: 0px 0px white; */
+    float: right;
+    padding: 5px;
   }
 
   #trashspanthree {
     font-size: 8px;
     color: rgba(255, 0, 0, 0.842);
     cursor: pointer;
-    text-shadow: 0px 0px white;
+    /* text-shadow: 0px 0px white; */
+    float: right;
   }
 
   .commentr {
@@ -133,5 +136,7 @@
     color: #95af88;
     cursor: pointer;
     text-shadow: 0px 0px black;
+    float: right;
+    padding: 5px;
   }
 </style>
