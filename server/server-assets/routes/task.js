@@ -27,6 +27,8 @@ router.post('/:listId/tasks', (req, res, next) => {
 })
 
 //PUT
+
+//Add comment
 router.put('/:listdId/tasks/:taskId/comments', (req, res, next) => {
   Tasks.findById(req.params.taskId)
     .then(task => {
@@ -47,6 +49,25 @@ router.put('/:listdId/tasks/:taskId/comments', (req, res, next) => {
       return
     })
     .catch(err => {
+      res.status(400).send(err)
+    })
+})
+
+//Change list that a task is attached to
+router.put('/:listdId/tasks/:taskId', (req, res, next) => {
+  Tasks.findById(req.params.taskId)
+    .then(task => {
+      if (!task.authorId.equals(req.session.uid)) {
+        return res.status(401).send("ACCESS DENIED!")
+      } else {
+        task.listId = req.body.listId
+      }
+      task.save()
+      res.send("Task moved to another list")
+      return
+    })
+    .catch(err => {
+      console.warn(err)
       res.status(400).send(err)
     })
 })

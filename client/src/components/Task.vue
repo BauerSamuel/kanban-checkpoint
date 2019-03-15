@@ -1,29 +1,33 @@
 <template>
   <div class="task">
-    <div class="taskCard">
-      <h6>
-        <span id=""><i @click="formBool = !formBool" class="fas fa-comment-medical commentr"></i></span>
-        {{taskData.content}}
-        <span id="trashspantwo"><i @click="deleteTask(taskData)" class="fas fa-trash"></i></span>
-      </h6>
-      <form @submit.prevent>
-        <input v-if="formBool" type="text" placeholder=" Comment:" v-model="newComment.content" required>
-        <button @click="addComment(taskData)" v-if="formBool" class="" type="submit">Comment <i
-            class="fas fa-external-link-alt"></i></button>
-      </form>
-    </div>
-    <div class="commentz" v-for="comment in taskData.comments">
-      <p>{{comment.content}} <span id="trashspanthree"><i @click="deleteComment(comment)"
-            class="fas fa-trash"></i></span>
-      </p>
-    </div>
+    <drag :transfer-data="{ taskMoved: taskData} ">
+      <div class="taskCard">
+        <h6>
+          <span id=""><i @click="formBool = !formBool" class="fas fa-comment-medical commentr"></i></span>
+          {{taskData.content}}
+          <span id="trashspantwo"><i @click="deleteTask(taskData)" class="fas fa-trash"></i></span>
+        </h6>
+        <form @submit.prevent>
+          <input v-if="formBool" type="text" placeholder=" Comment:" v-model="newComment.content" required>
+          <button @click="addComment(taskData)" v-if="formBool" class="" type="submit">Comment <i
+              class="fas fa-external-link-alt"></i></button>
+        </form>
+      </div>
+      <div class="commentz" v-for="comment in taskData.comments">
+        <p>{{comment.content}} <span id="trashspanthree"><i @click="deleteComment(comment)"
+              class="fas fa-trash"></i></span>
+        </p>
+      </div>
+    </drag>
   </div>
 </template>
 
 <script>
+  import { Drag, Drop } from 'vue-drag-drop'
   export default {
     name: "Task",
     props: ['taskData'],
+    components: { Drag, Drop },
     data() {
       return {
         formBool: false,
@@ -75,8 +79,7 @@
         }
         this.$store.dispatch('deleteComment', object)
       }
-    },
-    components: {}
+    }
   }
 </script>
 <style>

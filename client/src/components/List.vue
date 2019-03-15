@@ -11,31 +11,29 @@
     <button @click="addTask" v-if="seen" class="" type="button">Add Task <i
         class="fas fa-external-link-alt"></i></button>
     <hr>
-    <task class="formatting" v-for=" task in tasks" :taskData='task'>
-    </task>
-    <!-- <div @dblclick="formBool = !formBool" class="taskCard" v-for="task in tasks">
-      <h6>{{task.content}}<span id="trashspan"><i @click="deleteTask(task)" class="fas fa-trash"></i></span></h6>
-      <input v-if="formBool" type="text" placeholder="comment:" v-model="newComment.content" required>
-      <button @click="addComment(task)" v-if="formBool" class="" type="submit">Add Comment<i
-          class="fas fa-external-link-alt"></i></button>
-    </div> -->
-    <!-- <div v-for="comment in comments">
-      <p>{{comment.content}}</p>
-    </div> -->
+    <task class="formatting" v-for=" task in tasks" :taskData='task'></task>
+    <hr>
+    <div class="">
+      <h6 class="instructions">Drag And Drop Tasks Below</h6>
+      <drop class="dropZone" @drop="handleDrop"></drop>
+    </div>
   </div>
 </template>
 
 <script>
   import Task from '@/components/Task.vue'
+  import { Drag, Drop } from 'vue-drag-drop'
   export default {
     name: 'List',
     props: ['listData'],
+    components: { Drag, Drop },
     mounted() {
       //this.$store.dispatch('getLists', this.$route.params.boardId)
       this.$store.dispatch('getTasks', { boardId: this.listData.boardId, listId: this.listData._id })
     },
     data() {
       return {
+        active: false,
         seen: false,
         newTask: {
           content: '',
@@ -69,6 +67,21 @@
           content: '',
           listId: this.listData._id
         }
+      },
+      handleDrop(data) {
+        console.log(data.taskMoved.listId + " and new list is " + this.listData._id);
+        let oldListId = data.taskMoved.listId;
+        data.taskMoved.listId = this.listData._id
+        let object = {
+          boardId: this.listData.boardId,
+          listId: this.listData._id,
+          oldListId,
+          taskMoved: data.taskMoved
+        }
+        this.$store.dispatch('changeTask', object)
+      },
+      dragz() {
+        this.active = !this.active;
       }
 
     },
@@ -123,6 +136,17 @@
     padding: 1em;
   }
 
+  .dropZone {
+    display: flex;
+    margin-bottom: 15px;
+    background-image: url('http://www.staroceans.org/myprojects/vlc/extras/package/macosx/Resources/mainwindow/dropzone%402x.png');
+    background-repeat: round;
+    background-size: contain;
+    justify-content: center;
+    min-height: 6em;
+
+  }
+
   hr {
     background-color: rgba(18, 18, 19, 0.329);
     height: 3px;
@@ -155,5 +179,19 @@
 
   .formatting {
     margin-bottom: 10px
+  }
+
+  .instructions {
+    color: rgba(255, 255, 255, 0.466);
+    background-color: rgba(0, 0, 0, 0.466);
+    border-radius: 10px;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .someclass:hover .hide {
+    display: block;
   }
 </style>

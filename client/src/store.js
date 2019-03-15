@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios'
 import router from './router'
+import { get } from 'https';
 
 Vue.use(Vuex)
 
@@ -135,7 +136,18 @@ export default new Vuex.Store({
 
       api.post(`boards/${boardId}/lists/${listId}/tasks`, dataObject.newTask)
         .then(res => {
+          debugger
           dispatch('getTasks', dataObject)
+        })
+    },
+    changeTask({ commit, dispatch }, dataObject) {
+      let boardId = dataObject.boardId
+      let listId = dataObject.listId
+      let updatedTask = dataObject.taskMoved
+      api.put(`boards/${boardId}/lists/${listId}/tasks/${updatedTask._id}`, updatedTask)
+        .then(res => {
+          dispatch('getTasks', dataObject)
+          dispatch('getTasks', { boardId, listId: dataObject.oldListId })
         })
     },
     deleteTask({ commit, dispatch }, dataObject) {

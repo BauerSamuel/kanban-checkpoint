@@ -76,7 +76,7 @@
   }
 
   .stitle {
-    background-color: rgba(0, 0, 0, 0.123);
+    background-color: rgba(0, 0, 0, 0.445);
     border-radius: 30px;
     color: white;
     text-shadow: -1px -1px black;
